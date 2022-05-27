@@ -40,6 +40,7 @@ def print_sound(indata, outdata, frames, time, status):
         count = 0
 
 def sound():
+    
     with sd.Stream(callback=print_sound):
         sd.sleep(-1)
 

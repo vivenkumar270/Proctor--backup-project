@@ -90,8 +90,9 @@ def run_detection():
     axes.set_ylim(0,1)
     line, = axes.plot(XDATA, YDATA, 'r-')
     plt.title("SUSpicious Behaviour Detection")
-    plt.xlabel("Time")
+    plt.xlabel("Time in Seconds")
     plt.ylabel("Cheat Probablity")
+    
     i = 0
     while True:
         YDATA.pop(0)
