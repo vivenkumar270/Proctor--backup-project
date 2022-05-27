@@ -30,7 +30,7 @@ def process():
     # print("entered proess()...")
     if GLOBAL_CHEAT == 0:
         if head_pose.X_AXIS_CHEAT == 0:
-            if head_pose.Y_AXIS_CHEAT == 0:
+            if head_pose.Y_AXIS_CHEAT == 0: 
                 if audio.AUDIO_CHEAT == 0:
                     PERCENTAGE_CHEAT = avg(0, PERCENTAGE_CHEAT)
                 else:
@@ -90,8 +90,9 @@ def run_detection():
     axes.set_ylim(0,1)
     line, = axes.plot(XDATA, YDATA, 'r-')
     plt.title("SUSpicious Behaviour Detection")
-    plt.xlabel("Time")
+    plt.xlabel("Time in Seconds")
     plt.ylabel("Cheat Probablity")
+    
     i = 0
     while True:
         YDATA.pop(0)
@@ -99,6 +100,6 @@ def run_detection():
         line.set_xdata(XDATA)
         line.set_ydata(YDATA)
         plt.draw()
-        plt.pause(1e-17)
+        plt.pause(1e-17) 
         time.sleep(1/5)
         process()

@@ -6,9 +6,9 @@ import mediapipe as mp
 import numpy as np
 import threading as th
 import sounddevice as sd
-import audio
 
 # place holders and global variables
+
 x = 0                                       # X axis head pose
 y = 0                                       # Y axis head pose
 
@@ -45,7 +45,7 @@ def pose():
         img_h, img_w, img_c = image.shape
         face_3d = []
         face_2d = []
-        
+        # marking points on face including and not limited to mouth head and chin
         face_ids = [33, 263, 1, 61, 291, 199]
 
         if results.multi_face_landmarks:
@@ -87,6 +87,7 @@ def pose():
                 dist_matrix = np.zeros((4, 1), dtype=np.float64)
 
                 # Solve PnP
+                # perspective and point , its the problem of estimating pose given a set of input point and 2d projection
                 success, rot_vec, trans_vec = cv2.solvePnP(face_3d, face_2d, cam_matrix, dist_matrix)
 
                 # Get rotational matrix
@@ -95,7 +96,7 @@ def pose():
                 # Get angles
                 angles, mtxR, mtxQ, Qx, Qy, Qz = cv2.RQDecomp3x3(rmat)
 
-                # Get the y rotation degree
+                # Get the y rotation degree: converting 3d anlges coordination to 2d  points
                 x = angles[0] * 360
                 y = angles[1] * 360
 
@@ -111,8 +112,7 @@ def pose():
                 else:
                     text = "Forward"
                 text = str(int(x)) + "::" + str(int(y)) + text
-                # print(str(int(x)) + "::" + str(int(y)))
-                # print("x: {x}   |   y: {y}  |   sound amplitude: {amp}".format(x=int(x), y=int(y), amp=audio.SOUND_AMPLITUDE))
+                
                 
                 # Y is left / right
                 # X is up / down
