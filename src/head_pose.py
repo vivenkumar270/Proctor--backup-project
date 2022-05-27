@@ -8,6 +8,7 @@ import threading as th
 import sounddevice as sd
 
 # place holders and global variables
+
 x = 0                                       # X axis head pose
 y = 0                                       # Y axis head pose
 
